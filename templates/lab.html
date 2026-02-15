@@ -1,0 +1,112 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Lab Workspace</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body data-page="lab">
+
+<div class="app-shell">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Virtual Lab</h2>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="/dashboard" class="nav-btn">Dashboard</a>
+            <a href="/lab?type=linux" class="nav-btn">Linux Lab</a>
+            <a href="/lab?type=python" class="nav-btn">Python Lab</a>
+            <a href="/lab?type=web" class="nav-btn">Web Development Lab</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="/logout" class="secondary-btn">Logout</a>
+        </div>
+    </aside>
+
+    <!-- Main Panel -->
+    <div class="main-panel">
+        <header class="topbar">
+            <h1 id="lab-title">Lab Workspace</h1>
+            <div class="topbar-actions">
+                <button id="theme-toggle" class="icon-btn">🌙</button>
+                <a href="/dashboard" class="secondary-btn">Back to Dashboard</a>
+            </div>
+        </header>
+
+        <section class="panel-content">
+            <div id="workspace-area">
+
+                <!-- Linux Lab -->
+                <section id="linux-lab" class="lab-section hidden">
+                    <h2>Linux Terminal Lab</h2>
+
+                    <label>Terminal Command</label>
+                    <div class="input-group">
+                        <input id="linux-command" type="text" placeholder="Try ls, pwd, clear">
+                        <button id="linux-run" class="primary-btn">Run</button>
+                    </div>
+
+                    <pre id="linux-output" class="output-console"></pre>
+                </section>
+
+                <!-- Python Lab -->
+                <section id="python-lab" class="lab-section hidden">
+                    <h2>Python Lab</h2>
+
+                    <textarea id="python-code" rows="8">print("Hello")
+2 + 2</textarea>
+
+                    <button id="python-run" class="primary-btn">Run Code</button>
+
+                    <pre id="python-output" class="output-console"></pre>
+                </section>
+
+                <!-- Web Lab -->
+                <section id="web-lab" class="lab-section hidden">
+                    <h2>Web Development Lab</h2>
+
+                    <textarea id="web-html" rows="8">
+<h2>Hello Web Lab</h2>
+<p>Edit this HTML</p>
+                    </textarea>
+
+                    <button id="web-run" class="primary-btn">Render</button>
+
+                    <iframe id="web-preview" class="preview-frame"></iframe>
+                </section>
+
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<script>
+    // Get lab type from URL
+    const params = new URLSearchParams(window.location.search);
+    const labType = params.get("type");
+
+    const sections = {
+        linux: document.getElementById("linux-lab"),
+        python: document.getElementById("python-lab"),
+        web: document.getElementById("web-lab")
+    };
+
+    if (labType && sections[labType]) {
+        sections[labType].classList.remove("hidden");
+        document.getElementById("lab-title").textContent =
+            labType.charAt(0).toUpperCase() + labType.slice(1) + " Lab";
+    } else {
+        window.location.href = "/dashboard";
+    }
+</script>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

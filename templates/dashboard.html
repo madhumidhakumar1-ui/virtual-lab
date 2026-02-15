@@ -1,0 +1,83 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Lab Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body data-page="dashboard">
+
+<div class="app-shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Virtual Lab</h2>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="/dashboard" class="nav-btn is-active">Dashboard</a>
+            <a href="/lab?type=linux" class="nav-btn">Linux Lab</a>
+            <a href="/lab?type=python" class="nav-btn">Python Lab</a>
+            <a href="/lab?type=web" class="nav-btn">Web Development Lab</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="/logout" class="secondary-btn">Logout</a>
+        </div>
+    </aside>
+
+    <!-- Main Panel -->
+    <div class="main-panel">
+
+        <header class="topbar">
+            <h1>Student Dashboard</h1>
+            <div class="topbar-actions">
+                <button id="theme-toggle" class="icon-btn">🌙</button>
+            </div>
+        </header>
+
+        <section class="panel-content">
+
+            <div class="welcome-card">
+                <h2 id="dashboard-greeting">Welcome back!</h2>
+                <p>Select a lab to launch your virtual workspace.</p>
+            </div>
+
+            <section class="lab-grid">
+
+                <!-- Linux -->
+                <article class="lab-card">
+                    <h3>Linux Terminal Lab</h3>
+                    <p>Practice essential shell commands in a simulated terminal environment.</p>
+                    <a href="/lab?type=linux" class="primary-btn">Open Lab</a>
+                </article>
+
+                <!-- Python -->
+                <article class="lab-card">
+                    <h3>Python Lab</h3>
+                    <p>Run Python snippets and explore core programming concepts.</p>
+                    <a href="/lab?type=python" class="primary-btn">Open Lab</a>
+                </article>
+
+                <!-- Web -->
+                <article class="lab-card">
+                    <h3>Web Development Lab</h3>
+                    <p>Prototype web pages with live HTML preview and instant feedback.</p>
+                    <a href="/lab?type=web" class="primary-btn">Open Lab</a>
+                </article>
+
+            </section>
+
+        </section>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
